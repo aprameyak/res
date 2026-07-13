@@ -1,11 +1,9 @@
-"""User and authentication models."""
 import uuid
 from datetime import datetime
 from sqlalchemy import Column, String, Boolean, DateTime, ForeignKey, Text
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from app.database import Base
-
 
 class User(Base):
     __tablename__ = "users"
@@ -24,7 +22,6 @@ class User(Base):
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
 
-    # Relationships
     resumes = relationship("Resume", back_populates="user", cascade="all, delete-orphan")
     evaluations = relationship("Evaluation", back_populates="user")
     refresh_tokens = relationship("RefreshToken", back_populates="user", cascade="all, delete-orphan")
@@ -32,7 +29,6 @@ class User(Base):
 
     def __repr__(self) -> str:
         return f"<User id={self.id} email={self.email}>"
-
 
 class RefreshToken(Base):
     __tablename__ = "refresh_tokens"

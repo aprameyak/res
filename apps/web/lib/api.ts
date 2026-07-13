@@ -1,7 +1,3 @@
-/**
- * Typed API client for the ResumeScore FastAPI backend.
- * All calls go through axios with auth interceptors.
- */
 import axios, { type AxiosError } from "axios";
 import type {
   AuthTokens,
@@ -18,7 +14,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
 export const api = axios.create({
   baseURL: BASE_URL,
-  timeout: 120_000, // 2 min — evaluations can take a while
+  timeout: 120_000,
   headers: { "Content-Type": "application/json" },
 });
 

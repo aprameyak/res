@@ -1,4 +1,3 @@
-"""Resume upload and management service."""
 import uuid
 import logging
 from pathlib import Path
@@ -17,7 +16,6 @@ ALLOWED_CONTENT_TYPES = {
 }
 ALLOWED_EXTENSIONS = {".pdf", ".docx"}
 
-
 def validate_resume_file(filename: str, content_type: str, size: int) -> None:
     ext = Path(filename).suffix.lower()
     if ext not in ALLOWED_EXTENSIONS:
@@ -26,7 +24,6 @@ def validate_resume_file(filename: str, content_type: str, size: int) -> None:
         raise ValueError(f"Content type '{content_type}' not allowed.")
     if size > settings.max_upload_bytes:
         raise ValueError(f"File exceeds maximum size of {settings.MAX_UPLOAD_SIZE_MB}MB.")
-
 
 def create_resume(
     db: Session,
@@ -55,7 +52,6 @@ def create_resume(
     logger.info(f"Created resume {resume.id} for user {user_id}")
     return resume
 
-
 def get_resume(db: Session, resume_id: uuid.UUID, user_id: uuid.UUID) -> Optional[Resume]:
     return (
         db.query(Resume)
@@ -63,13 +59,11 @@ def get_resume(db: Session, resume_id: uuid.UUID, user_id: uuid.UUID) -> Optiona
         .first()
     )
 
-
 def list_resumes(db: Session, user_id: uuid.UUID, skip: int = 0, limit: int = 50) -> tuple[list[Resume], int]:
     q = db.query(Resume).filter(Resume.user_id == user_id)
     total = q.count()
     resumes = q.order_by(Resume.created_at.desc()).offset(skip).limit(limit).all()
     return resumes, total
-
 
 def delete_resume(db: Session, resume_id: uuid.UUID, user_id: uuid.UUID) -> bool:
     resume = get_resume(db, resume_id, user_id)

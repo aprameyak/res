@@ -1,4 +1,3 @@
-"""Celery background tasks for resume evaluation."""
 import asyncio
 import logging
 import uuid
@@ -30,10 +29,8 @@ celery_app.conf.update(
     },
 )
 
-
 @celery_app.task(bind=True, name="app.workers.tasks.evaluate_resume_task", max_retries=2)
 def evaluate_resume_task(self, evaluation_id: str, resume_id: str, user_id: str, job_description: str | None = None):
-    """Run hiring-agent evaluation and store results. Retries up to 2 times on failure."""
     from app.database import SessionLocal
     from app.models.evaluation import Evaluation, EvaluationStatus
     from app.models.resume import Resume, ResumeStatus
@@ -89,10 +86,8 @@ def evaluate_resume_task(self, evaluation_id: str, resume_id: str, user_id: str,
     finally:
         db.close()
 
-
 @celery_app.task(bind=True, name="app.workers.tasks.generate_report_task")
 def generate_report_task(self, evaluation_id: str, user_id: str) -> str:
-    """Generate a PDF report for an evaluation."""
     from app.database import SessionLocal
     from app.models.evaluation import Evaluation
     from app.services.report_service import generate_pdf_report

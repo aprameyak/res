@@ -15,14 +15,12 @@ export function ComparisonView({ result }: ComparisonViewProps) {
 
   return (
     <div className="space-y-6">
-      {/* Score Summary */}
       <div className="grid grid-cols-3 gap-4">
         <ScoreCard label="Resume A" score={evaluation_a.total_score ?? 0} name={evaluation_a.candidate_name} />
         <DiffCard diff={total_score_diff} />
         <ScoreCard label="Resume B" score={evaluation_b.total_score ?? 0} name={evaluation_b.candidate_name} />
       </div>
 
-      {/* Category Diffs */}
       <div className="space-y-3">
         <h3 className="text-sm font-semibold">Category Comparison</h3>
         {category_diffs.map((diff, i) => (
@@ -62,7 +60,6 @@ export function ComparisonView({ result }: ComparisonViewProps) {
         ))}
       </div>
 
-      {/* New Strengths / Regressions */}
       {(new_strengths.length > 0 || regressions.length > 0) && (
         <div className="grid grid-cols-2 gap-4">
           {new_strengths.length > 0 && (

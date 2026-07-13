@@ -1,4 +1,3 @@
-"""Reports router — PDF report generation."""
 import uuid
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import FileResponse
@@ -12,14 +11,12 @@ from app.routers.auth import get_current_user_dep
 
 router = APIRouter()
 
-
 @router.get("/{evaluation_id}/download")
 def download_report(
     evaluation_id: uuid.UUID,
     current_user: User = Depends(get_current_user_dep),
     db: Session = Depends(get_db),
 ):
-    """Generate and download a PDF report for a completed evaluation."""
     evaluation = (
         db.query(Evaluation)
         .filter(

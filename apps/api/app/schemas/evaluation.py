@@ -1,15 +1,12 @@
-"""Evaluation Pydantic schemas — mirrors hiring-agent output exactly."""
 from pydantic import BaseModel
 from typing import Optional, Any
 from datetime import datetime
 import uuid
 
-
 class CategoryScoreOut(BaseModel):
     score: float
     max: float
     evidence: Optional[str] = None
-
 
 class ScoresOut(BaseModel):
     open_source: CategoryScoreOut
@@ -17,16 +14,13 @@ class ScoresOut(BaseModel):
     production: CategoryScoreOut
     technical_skills: CategoryScoreOut
 
-
 class BonusPointsOut(BaseModel):
     total: float
     breakdown: Optional[str] = None
 
-
 class DeductionsOut(BaseModel):
     total: float
     reasons: Optional[str] = None
-
 
 class EvaluationOut(BaseModel):
     id: uuid.UUID
@@ -104,18 +98,15 @@ class EvaluationOut(BaseModel):
             created_at=eval_obj.created_at,
         )
 
-
 class EvaluationListOut(BaseModel):
     evaluations: list[EvaluationOut]
     total: int
-
 
 class JobMatchRequest(BaseModel):
     resume_id: uuid.UUID
     job_description: str
     job_title: Optional[str] = None
     company: Optional[str] = None
-
 
 class JobMatchOut(BaseModel):
     id: uuid.UUID
@@ -133,11 +124,9 @@ class JobMatchOut(BaseModel):
 
     model_config = {"from_attributes": True}
 
-
 class CompareRequest(BaseModel):
     evaluation_id_a: uuid.UUID
     evaluation_id_b: uuid.UUID
-
 
 class CategoryDiff(BaseModel):
     category: str
@@ -145,7 +134,6 @@ class CategoryDiff(BaseModel):
     score_b: float
     diff: float
     max: float
-
 
 class CompareOut(BaseModel):
     evaluation_a: EvaluationOut

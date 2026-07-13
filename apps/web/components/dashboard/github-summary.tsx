@@ -1,6 +1,6 @@
 "use client";
-import { Github, Star, GitFork, Users } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Image from "next/image";
+import { Github, Star, Users } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import type { GitHubData } from "@/types/api";
 
@@ -15,14 +15,15 @@ export function GitHubSummary({ githubData }: GitHubSummaryProps) {
 
   return (
     <div className="space-y-4">
-      {/* Profile */}
       <div className="flex items-center gap-3">
         {profile.avatar_url && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <Image
             src={profile.avatar_url}
-            alt={profile.login}
+            alt={profile.login ?? "GitHub avatar"}
+            width={48}
+            height={48}
             className="h-12 w-12 rounded-full"
+            unoptimized
           />
         )}
         <div>
@@ -34,14 +35,12 @@ export function GitHubSummary({ githubData }: GitHubSummaryProps) {
         </div>
       </div>
 
-      {/* Stats */}
       <div className="grid grid-cols-3 gap-3">
         <Stat label="Repos" value={profile.public_repos ?? 0} />
         <Stat label="Followers" value={profile.followers ?? 0} icon={<Users className="h-3 w-3" />} />
         <Stat label="Following" value={profile.following ?? 0} />
       </div>
 
-      {/* Top Projects */}
       {projects.length > 0 && (
         <div>
           <h4 className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">

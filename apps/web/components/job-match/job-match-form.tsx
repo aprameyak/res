@@ -86,7 +86,7 @@ export function JobMatchForm({ onResult }: JobMatchFormProps) {
         {jobMatchMutation.isPending ? (
           <>
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            Analyzing match…
+            Analyzing match...
           </>
         ) : (
           "Analyze Job Match"

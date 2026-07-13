@@ -65,7 +65,7 @@ export function ResumeWorkspace() {
           )}
           {latestEval && (
             <Badge className="text-xs">
-              Score: {latestEval.total_score}/120 · {getScoreGrade(latestEval.total_score ?? 0)}
+              Score: {latestEval.total_score}/120 | {getScoreGrade(latestEval.total_score ?? 0)}
             </Badge>
           )}
         </div>

@@ -1,4 +1,3 @@
-// TypeScript types mirroring the FastAPI schemas + hiring-agent output
 
 export interface CategoryScore {
   score: number;
@@ -180,7 +179,6 @@ export interface EvaluationListResponse {
   total: number;
 }
 
-// Score weight constants (mirrors hiring-agent)
 export const SCORE_WEIGHTS = {
   open_source: { max: 35, label: "Open Source" },
   self_projects: { max: 30, label: "Self Projects" },

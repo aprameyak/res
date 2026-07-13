@@ -45,7 +45,7 @@ export default function DashboardPage() {
             Welcome{user?.full_name ? `, ${user.full_name.split(" ")[0]}` : ""}
           </h2>
           <p className="max-w-md text-sm text-muted-foreground">
-            Open your resume workspace to edit, score, tailor, and export — everything lives in one place.
+            Open your resume workspace to edit, score, tailor, and export in one place.
           </p>
           <Link href="/resume">
             <Button size="lg" className="mt-2">
@@ -67,7 +67,6 @@ export default function DashboardPage() {
         </p>
       </motion.div>
 
-      {/* Top row: score + radar */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <Card className="flex flex-col items-center justify-center p-6">
           <ScoreOverview
@@ -86,13 +85,11 @@ export default function DashboardPage() {
         </Card>
       </div>
 
-      {/* Category breakdown */}
       <div>
         <h2 className="mb-3 text-sm font-semibold">Category Breakdown</h2>
         <CategoryBreakdown evaluation={latestEval} />
       </div>
 
-      {/* Strengths / Weaknesses */}
       <Card>
         <CardHeader className="pb-2">
           <CardTitle className="text-sm font-medium">Analysis</CardTitle>
@@ -102,7 +99,6 @@ export default function DashboardPage() {
         </CardContent>
       </Card>
 
-      {/* GitHub + Timeline */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {latestEval.github_data && Object.keys(latestEval.github_data).length > 0 && (
           <Card>
@@ -127,7 +123,6 @@ export default function DashboardPage() {
         )}
       </div>
 
-      {/* Recent analyses */}
       <Card>
         <CardHeader className="pb-2">
           <div className="flex items-center justify-between">

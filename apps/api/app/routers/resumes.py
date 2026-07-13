@@ -1,4 +1,3 @@
-"""Resume upload and management router."""
 import io
 import uuid
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, status, BackgroundTasks
@@ -16,7 +15,6 @@ from app.routers.auth import get_current_user_dep
 
 router = APIRouter()
 
-
 @router.post("/upload", response_model=ResumeOut, status_code=status.HTTP_201_CREATED)
 async def upload_resume(
     file: UploadFile = File(...),
@@ -24,7 +22,6 @@ async def upload_resume(
     current_user: User = Depends(get_current_user_dep),
     db: Session = Depends(get_db),
 ):
-    """Upload a PDF or DOCX resume. Triggers evaluation automatically."""
     contents = await file.read()
     size = len(contents)
     file_obj = io.BytesIO(contents)
@@ -41,7 +38,6 @@ async def upload_resume(
     except ValueError as e:
         raise HTTPException(status_code=422, detail=str(e))
 
-    # Queue evaluation
     evaluation = create_evaluation_record(db, resume.id, current_user.id)
     from app.workers.tasks import evaluate_resume_task
     task = evaluate_resume_task.apply_async(
@@ -54,7 +50,6 @@ async def upload_resume(
 
     return ResumeOut.model_validate(resume)
 
-
 @router.post("/from-builder", response_model=ResumeOut, status_code=status.HTTP_201_CREATED)
 async def upload_from_builder(
     payload: BuilderUploadIn,
@@ -62,7 +57,6 @@ async def upload_from_builder(
     current_user: User = Depends(get_current_user_dep),
     db: Session = Depends(get_db),
 ):
-    """Convert builder plain text to PDF and run hiring-agent evaluation."""
     content = payload.content.strip()
     if len(content) < 50:
         raise HTTPException(status_code=422, detail="Resume content is too short to evaluate.")
@@ -95,7 +89,6 @@ async def upload_from_builder(
 
     return ResumeOut.model_validate(resume)
 
-
 @router.get("", response_model=ResumeListOut)
 def list_user_resumes(
     skip: int = 0,
@@ -105,7 +98,6 @@ def list_user_resumes(
 ):
     resumes, total = list_resumes(db, current_user.id, skip=skip, limit=limit)
     return ResumeListOut(resumes=[ResumeOut.model_validate(r) for r in resumes], total=total)
-
 
 @router.get("/{resume_id}", response_model=ResumeOut)
 def get_single_resume(
@@ -118,7 +110,6 @@ def get_single_resume(
         raise HTTPException(status_code=404, detail="Resume not found")
     return ResumeOut.model_validate(resume)
 
-
 @router.get("/{resume_id}/evaluations", response_model=list[EvaluationOut])
 def get_resume_evaluation_history(
     resume_id: uuid.UUID,
@@ -130,7 +121,6 @@ def get_resume_evaluation_history(
         raise HTTPException(status_code=404, detail="Resume not found")
     evals = get_resume_evaluations(db, resume_id, current_user.id)
     return [EvaluationOut.from_orm_with_scores(e) for e in evals]
-
 
 @router.delete("/{resume_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_user_resume(

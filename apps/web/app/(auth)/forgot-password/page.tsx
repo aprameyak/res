@@ -59,7 +59,7 @@ export default function ForgotPasswordPage() {
           {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
         </div>
         <Button type="submit" className="w-full" disabled={loading}>
-          {loading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Sending…</> : "Send reset link"}
+          {loading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Sending...</> : "Send reset link"}
         </Button>
       </form>
       <p className="text-center text-sm text-muted-foreground">

@@ -34,7 +34,7 @@ export function EvaluatePanel() {
       <Card>
         <CardHeader className="pb-2">
           <CardTitle className="text-sm font-medium">Or upload a file</CardTitle>
-          <CardDescription>PDF or DOCX · Max 10MB</CardDescription>
+          <CardDescription>PDF or DOCX, max 10MB</CardDescription>
         </CardHeader>
         <CardContent>
           <ResumeDropzone />
@@ -61,7 +61,7 @@ export function EvaluatePanel() {
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-sm font-medium">{resume.original_filename}</p>
                     <p className="text-xs text-muted-foreground">
-                      {formatBytes(resume.file_size)} · {formatDate(resume.created_at)}
+                      {formatBytes(resume.file_size)} | {formatDate(resume.created_at)}
                     </p>
                   </div>
                   <Badge

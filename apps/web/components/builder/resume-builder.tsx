@@ -148,7 +148,7 @@ export function ResumeBuilder() {
                 {document.contact.name || "Your Name"}
               </p>
               <p className="mt-1 text-center text-[10px] text-muted-foreground">
-                {[document.contact.email, document.contact.phone].filter(Boolean).join(" · ")}
+                {[document.contact.email, document.contact.phone].filter(Boolean).join(" | ")}
               </p>
               <hr className="my-3" />
               {document.sections.map((section) =>

@@ -1,4 +1,3 @@
-"""Storage service — local filesystem or S3."""
 import os
 import uuid
 import logging
@@ -8,7 +7,6 @@ from typing import BinaryIO
 from app.config import settings
 
 logger = logging.getLogger(__name__)
-
 
 class StorageService:
     def __init__(self):
@@ -72,6 +70,5 @@ class StorageService:
                 ExpiresIn=expires_in,
             )
         return f"/uploads/{Path(storage_key).name}"
-
 
 storage_service = StorageService()

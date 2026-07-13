@@ -1,4 +1,3 @@
-"""Authentication router."""
 import uuid
 import secrets
 from datetime import datetime, timedelta
@@ -24,7 +23,6 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 bearer_scheme = HTTPBearer()
 
-
 def get_current_user_dep(
     credentials: HTTPAuthorizationCredentials = Depends(bearer_scheme),
     db: Session = Depends(get_db),
@@ -37,7 +35,6 @@ def get_current_user_dep(
     if not user or not user.is_active:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User not found or inactive")
     return user
-
 
 @router.post("/register", response_model=TokenResponse, status_code=status.HTTP_201_CREATED)
 def register(body: UserCreate, db: Session = Depends(get_db)):
@@ -60,7 +57,6 @@ def register(body: UserCreate, db: Session = Depends(get_db)):
         user=UserOut.model_validate(user),
     )
 
-
 @router.post("/login", response_model=TokenResponse)
 def login(body: UserLogin, db: Session = Depends(get_db)):
     user = authenticate_user(db, body.email, body.password)
@@ -75,7 +71,6 @@ def login(body: UserLogin, db: Session = Depends(get_db)):
         refresh_token=refresh_token,
         user=UserOut.model_validate(user),
     )
-
 
 @router.post("/refresh", response_model=TokenResponse)
 def refresh_token(body: RefreshRequest, db: Session = Depends(get_db)):
@@ -101,16 +96,13 @@ def refresh_token(body: RefreshRequest, db: Session = Depends(get_db)):
         user=UserOut.model_validate(user),
     )
 
-
 @router.post("/logout", status_code=status.HTTP_204_NO_CONTENT)
 def logout(current_user: User = Depends(get_current_user_dep), db: Session = Depends(get_db)):
     revoke_all_refresh_tokens(db, current_user.id)
 
-
 @router.get("/me", response_model=UserOut)
 def me(current_user: User = Depends(get_current_user_dep)):
     return UserOut.model_validate(current_user)
-
 
 @router.patch("/me", response_model=UserOut)
 def update_profile(
@@ -126,7 +118,6 @@ def update_profile(
     db.refresh(current_user)
     return UserOut.model_validate(current_user)
 
-
 @router.post("/forgot-password", status_code=status.HTTP_204_NO_CONTENT)
 def forgot_password(body: ForgotPasswordRequest, db: Session = Depends(get_db)):
     user = get_user_by_email(db, body.email)
@@ -134,8 +125,6 @@ def forgot_password(body: ForgotPasswordRequest, db: Session = Depends(get_db)):
         user.reset_token = secrets.token_urlsafe(32)
         user.reset_token_expires = datetime.utcnow() + timedelta(hours=2)
         db.commit()
-    # Always return 204 to prevent email enumeration
-
 
 @router.post("/reset-password", status_code=status.HTTP_204_NO_CONTENT)
 def reset_password(body: ResetPasswordRequest, db: Session = Depends(get_db)):

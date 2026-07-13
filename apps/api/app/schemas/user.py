@@ -1,9 +1,7 @@
-"""User-related Pydantic schemas."""
 from pydantic import BaseModel, EmailStr, field_validator
 from typing import Optional
 from datetime import datetime
 import uuid
-
 
 class UserCreate(BaseModel):
     email: EmailStr
@@ -17,11 +15,9 @@ class UserCreate(BaseModel):
             raise ValueError("Password must be at least 8 characters")
         return v
 
-
 class UserLogin(BaseModel):
     email: EmailStr
     password: str
-
 
 class UserOut(BaseModel):
     id: uuid.UUID
@@ -35,21 +31,17 @@ class UserOut(BaseModel):
 
     model_config = {"from_attributes": True}
 
-
 class TokenResponse(BaseModel):
     access_token: str
     refresh_token: str
     token_type: str = "bearer"
     user: UserOut
 
-
 class RefreshRequest(BaseModel):
     refresh_token: str
 
-
 class ForgotPasswordRequest(BaseModel):
     email: EmailStr
-
 
 class ResetPasswordRequest(BaseModel):
     token: str
@@ -61,7 +53,6 @@ class ResetPasswordRequest(BaseModel):
         if len(v) < 8:
             raise ValueError("Password must be at least 8 characters")
         return v
-
 
 class UpdateProfileRequest(BaseModel):
     full_name: Optional[str] = None

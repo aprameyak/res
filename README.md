@@ -1,13 +1,13 @@
 # res.me
 
-Your resume workspace. Write, score, tailor, and export — one document, one app.
+Your resume workspace. Write, score, tailor, and export in one app.
 
 ## Stack
 
-- **Frontend** — Next.js 15 (`apps/web`)
-- **API** — FastAPI (`apps/api`)
-- **Scoring** — [interviewstreet/hiring-agent](https://github.com/interviewstreet/hiring-agent)
-- **Export** — LaTeX PDF pipeline (`packages/latex`)
+- Frontend: Next.js 15 (`apps/web`)
+- API: FastAPI (`apps/api`)
+- Scoring: [interviewstreet/hiring-agent](https://github.com/interviewstreet/hiring-agent)
+- Export: LaTeX PDF pipeline (`packages/latex`)
 
 ## Local development
 
@@ -15,9 +15,7 @@ Your resume workspace. Write, score, tailor, and export — one document, one ap
 git clone https://github.com/aprameyak/res.git
 cd res
 cp .env.example .env
-# Set GEMINI_API_KEY in .env
 
-# Frontend only (editor, tailor, export)
 npm install
 cd apps/web && npm run dev
 ```
@@ -42,13 +40,13 @@ Demo login: `demo@res.me` / `demo12345`
 ```bash
 cd apps/web
 vercel --prod
-# Set NEXT_PUBLIC_API_URL to your API URL
-# Set GEMINI_API_KEY for editor suggestions + tailor
 ```
+
+Set `NEXT_PUBLIC_API_URL` and `GEMINI_API_KEY`.
 
 **API (Railway / Render)**
 
-Deploy `apps/api` with PostgreSQL, Redis, and a Celery worker. Set env vars from `.env.example`.
+Deploy `apps/api` with PostgreSQL, Redis, and a Celery worker.
 
 ## License
 

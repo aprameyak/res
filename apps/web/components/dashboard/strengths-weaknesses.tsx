@@ -13,7 +13,6 @@ export function StrengthsWeaknesses({ evaluation }: StrengthsWeaknessesProps) {
 
   return (
     <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-      {/* Strengths */}
       <div>
         <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold text-emerald-600 dark:text-emerald-400">
           <CheckCircle2 className="h-4 w-4" />
@@ -39,7 +38,6 @@ export function StrengthsWeaknesses({ evaluation }: StrengthsWeaknessesProps) {
         </ul>
       </div>
 
-      {/* Weaknesses */}
       <div>
         <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold text-amber-600 dark:text-amber-400">
           <AlertCircle className="h-4 w-4" />

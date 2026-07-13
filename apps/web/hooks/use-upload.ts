@@ -14,7 +14,7 @@ export function useUpload() {
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["resumes"] });
       qc.invalidateQueries({ queryKey: ["evaluations"] });
-      toast.success("Resume uploaded — evaluation started!");
+      toast.success("Resume uploaded - evaluation started!");
       setProgress(0);
     },
     onError: (error: any) => {

@@ -6,7 +6,7 @@ import { Providers } from "./providers";
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: "res.me — Resume workspace",
+  title: "res.me - Resume workspace",
   description: "Write, score, tailor, and export your resume.",
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://res.me"),
 };

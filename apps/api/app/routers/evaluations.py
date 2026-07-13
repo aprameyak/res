@@ -1,4 +1,3 @@
-"""Evaluations router."""
 import uuid
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
@@ -19,7 +18,6 @@ from app.services.resume_service import get_resume
 from app.routers.auth import get_current_user_dep
 
 router = APIRouter()
-
 
 @router.get("", response_model=EvaluationListOut)
 def list_evaluations(
@@ -42,7 +40,6 @@ def list_evaluations(
         total=total,
     )
 
-
 @router.get("/{evaluation_id}", response_model=EvaluationOut)
 def get_single_evaluation(
     evaluation_id: uuid.UUID,
@@ -54,14 +51,12 @@ def get_single_evaluation(
         raise HTTPException(status_code=404, detail="Evaluation not found")
     return EvaluationOut.from_orm_with_scores(evaluation)
 
-
 @router.post("/trigger/{resume_id}", response_model=EvaluationOut, status_code=status.HTTP_202_ACCEPTED)
 def trigger_evaluation(
     resume_id: uuid.UUID,
     current_user: User = Depends(get_current_user_dep),
     db: Session = Depends(get_db),
 ):
-    """Manually trigger a new evaluation for an existing resume."""
     resume = get_resume(db, resume_id, current_user.id)
     if not resume:
         raise HTTPException(status_code=404, detail="Resume not found")
@@ -76,7 +71,6 @@ def trigger_evaluation(
     db.commit()
 
     return EvaluationOut.from_orm_with_scores(evaluation)
-
 
 @router.post("/compare", response_model=CompareOut)
 def compare_two_evaluations(
@@ -105,14 +99,12 @@ def compare_two_evaluations(
         regressions=diff["regressions"],
     )
 
-
 @router.post("/job-match", response_model=JobMatchOut, status_code=status.HTTP_202_ACCEPTED)
 def run_job_match(
     body: JobMatchRequest,
     current_user: User = Depends(get_current_user_dep),
     db: Session = Depends(get_db),
 ):
-    """Evaluate a resume against a job description."""
     resume = get_resume(db, body.resume_id, current_user.id)
     if not resume:
         raise HTTPException(status_code=404, detail="Resume not found")

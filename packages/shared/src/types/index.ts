@@ -1,4 +1,3 @@
-// Shared types for res.me
 
 export * from "./resume";
 

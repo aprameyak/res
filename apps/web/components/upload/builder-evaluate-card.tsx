@@ -39,7 +39,7 @@ export function BuilderEvaluateCard() {
     <Card className="shadow-none">
       <CardHeader className="pb-2">
         <CardTitle className="text-sm font-medium">Score current resume</CardTitle>
-        <CardDescription>Evaluate what you have in the editor — no upload required.</CardDescription>
+        <CardDescription>Evaluate what you have in the editor - no upload required.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-3">
         <pre className="max-h-28 overflow-hidden rounded-md border bg-muted/30 p-3 font-mono text-[11px] text-muted-foreground">
@@ -50,7 +50,7 @@ export function BuilderEvaluateCard() {
           {isEvaluatingBuilder ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Scoring…
+              Scoring...
             </>
           ) : (
             "Run evaluation"

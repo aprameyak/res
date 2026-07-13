@@ -42,10 +42,10 @@ export default function ComparePage() {
                 onChange={(e) => setIdA(e.target.value)}
                 className="flex h-9 w-full rounded-lg border border-input bg-background px-3 py-1 text-sm"
               >
-                <option value="">Select evaluation…</option>
+                <option value="">Select evaluation...</option>
                 {completedEvals.map((e) => (
                   <option key={e.id} value={e.id} disabled={e.id === idB}>
-                    {e.candidate_name || "Unknown"} · {e.total_score?.toFixed(0)}/120 · {formatDateTime(e.created_at)}
+                    {e.candidate_name || "Unknown"} | {e.total_score?.toFixed(0)}/120 | {formatDateTime(e.created_at)}
                   </option>
                 ))}
               </select>
@@ -57,10 +57,10 @@ export default function ComparePage() {
                 onChange={(e) => setIdB(e.target.value)}
                 className="flex h-9 w-full rounded-lg border border-input bg-background px-3 py-1 text-sm"
               >
-                <option value="">Select evaluation…</option>
+                <option value="">Select evaluation...</option>
                 {completedEvals.map((e) => (
                   <option key={e.id} value={e.id} disabled={e.id === idA}>
-                    {e.candidate_name || "Unknown"} · {e.total_score?.toFixed(0)}/120 · {formatDateTime(e.created_at)}
+                    {e.candidate_name || "Unknown"} | {e.total_score?.toFixed(0)}/120 | {formatDateTime(e.created_at)}
                   </option>
                 ))}
               </select>
@@ -73,7 +73,7 @@ export default function ComparePage() {
             onClick={handleCompare}
           >
             {compareMutation.isPending ? (
-              <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Comparing…</>
+              <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Comparing...</>
             ) : (
               <><GitCompare className="mr-2 h-4 w-4" />Compare</>
             )}

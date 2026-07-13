@@ -8,14 +8,10 @@ from functools import partial
 
 logger = logging.getLogger(__name__)
 
-
 class HiringAgentNotAvailable(Exception):
-    """Raised when the hiring-agent repository is not accessible."""
     pass
 
-
 class HiringAgentAdapter:
-    """Thin adapter around the interviewstreet/hiring-agent evaluation engine."""
 
     def __init__(self, agent_path: str):
         self.agent_path = Path(agent_path).resolve()

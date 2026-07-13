@@ -1,4 +1,3 @@
-/** Unified resume document schema — shared across builder, evaluator, and LaTeX export */
 
 export const SECTION_TYPES = {
   SUMMARY: "summary",

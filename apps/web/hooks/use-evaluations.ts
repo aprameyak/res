@@ -15,7 +15,6 @@ export function useEvaluation(id: string) {
     queryKey: ["evaluations", id],
     queryFn: () => evaluationsApi.get(id),
     enabled: !!id,
-    // Poll while pending/processing
     refetchInterval: (query) => {
       const status = query.state.data?.status;
       if (status === "pending" || status === "processing") return 3000;

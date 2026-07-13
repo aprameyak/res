@@ -1,4 +1,3 @@
-"""Authentication service — JWT tokens, password hashing."""
 from datetime import datetime, timedelta
 from typing import Optional
 import uuid
@@ -13,20 +12,16 @@ from app.models.user import User, RefreshToken
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-
 def hash_password(password: str) -> str:
     return pwd_context.hash(password)
 
-
 def verify_password(plain: str, hashed: str) -> bool:
     return pwd_context.verify(plain, hashed)
-
 
 def create_access_token(user_id: str) -> str:
     expire = datetime.utcnow() + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     data = {"sub": str(user_id), "exp": expire, "type": "access"}
     return jwt.encode(data, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
-
 
 def create_refresh_token(db: Session, user_id: uuid.UUID) -> str:
     token_str = secrets.token_urlsafe(64)
@@ -40,7 +35,6 @@ def create_refresh_token(db: Session, user_id: uuid.UUID) -> str:
     db.commit()
     return token_str
 
-
 def decode_access_token(token: str) -> Optional[str]:
     try:
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
@@ -50,14 +44,11 @@ def decode_access_token(token: str) -> Optional[str]:
     except JWTError:
         return None
 
-
 def get_user_by_email(db: Session, email: str) -> Optional[User]:
     return db.query(User).filter(User.email == email).first()
 
-
 def get_user_by_id(db: Session, user_id: uuid.UUID) -> Optional[User]:
     return db.query(User).filter(User.id == user_id).first()
-
 
 def authenticate_user(db: Session, email: str, password: str) -> Optional[User]:
     user = get_user_by_email(db, email)
@@ -65,9 +56,7 @@ def authenticate_user(db: Session, email: str, password: str) -> Optional[User]:
         return None
     return user
 
-
 def rotate_refresh_token(db: Session, old_token: str, user_id: uuid.UUID) -> Optional[str]:
-    """Revoke old refresh token and issue a new one."""
     token_obj = (
         db.query(RefreshToken)
         .filter(
@@ -83,7 +72,6 @@ def rotate_refresh_token(db: Session, old_token: str, user_id: uuid.UUID) -> Opt
     token_obj.revoked = True
     db.commit()
     return create_refresh_token(db, user_id)
-
 
 def revoke_all_refresh_tokens(db: Session, user_id: uuid.UUID) -> None:
     db.query(RefreshToken).filter(

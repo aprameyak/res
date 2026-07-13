@@ -1,4 +1,3 @@
-"""Organization and membership models."""
 import uuid
 from datetime import datetime
 from sqlalchemy import Column, String, DateTime, ForeignKey, Enum
@@ -7,18 +6,15 @@ from sqlalchemy.orm import relationship
 import enum
 from app.database import Base
 
-
 class OrgPlan(str, enum.Enum):
     FREE = "free"
     PRO = "pro"
     ENTERPRISE = "enterprise"
 
-
 class MemberRole(str, enum.Enum):
     OWNER = "owner"
     ADMIN = "admin"
     MEMBER = "member"
-
 
 class Organization(Base):
     __tablename__ = "organizations"
@@ -35,7 +31,6 @@ class Organization(Base):
 
     def __repr__(self) -> str:
         return f"<Organization id={self.id} name={self.name}>"
-
 
 class OrganizationMember(Base):
     __tablename__ = "organization_members"

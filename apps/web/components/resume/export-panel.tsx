@@ -32,7 +32,7 @@ export function ExportPanel() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Export failed");
       setLatex(data.latex);
-      toast.success("LaTeX ready — download and compile to PDF.");
+      toast.success("LaTeX ready - download and compile to PDF.");
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Export failed");
     } finally {

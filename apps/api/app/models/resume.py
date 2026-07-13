@@ -1,4 +1,3 @@
-"""Resume storage model."""
 import uuid
 from datetime import datetime
 from sqlalchemy import Column, String, Integer, DateTime, ForeignKey, Text, Enum
@@ -7,13 +6,11 @@ from sqlalchemy.orm import relationship
 import enum
 from app.database import Base
 
-
 class ResumeStatus(str, enum.Enum):
     PENDING = "pending"
     PROCESSING = "processing"
     COMPLETED = "completed"
     FAILED = "failed"
-
 
 class Resume(Base):
     __tablename__ = "resumes"
@@ -32,7 +29,6 @@ class Resume(Base):
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
 
-    # Relationships
     user = relationship("User", back_populates="resumes")
     evaluations = relationship("Evaluation", back_populates="resume", cascade="all, delete-orphan")
     job_matches = relationship("JobMatch", back_populates="resume", cascade="all, delete-orphan")

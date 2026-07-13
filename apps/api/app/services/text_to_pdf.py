@@ -1,10 +1,8 @@
-"""Convert plain-text resume content to PDF for hiring-agent evaluation."""
 from io import BytesIO
 
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer
-
 
 def _escape_xml(text: str) -> str:
     return (
@@ -13,9 +11,7 @@ def _escape_xml(text: str) -> str:
         .replace(">", "&gt;")
     )
 
-
 def text_to_pdf_bytes(text: str) -> bytes:
-    """Render resume plain text as a simple PDF suitable for PDFHandler."""
     buffer = BytesIO()
     doc = SimpleDocTemplate(
         buffer,

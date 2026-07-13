@@ -13,7 +13,7 @@ interface ScoreOverviewProps {
 export function ScoreOverview({ evaluation, previousScore }: ScoreOverviewProps) {
   const total = evaluation.total_score ?? 0;
   const percentage = (total / MAX_TOTAL_SCORE) * 100;
-  const circumference = 2 * Math.PI * 54; // r=54
+  const circumference = 2 * Math.PI * 54;
   const offset = circumference - (percentage / 100) * circumference;
   const grade = scoreGrade(total);
 
@@ -26,7 +26,6 @@ export function ScoreOverview({ evaluation, previousScore }: ScoreOverviewProps)
     <div className="flex flex-col items-center gap-4">
       <div className="relative h-36 w-36">
         <svg className="h-36 w-36 -rotate-90" viewBox="0 0 120 120">
-          {/* Track */}
           <circle
             cx="60" cy="60" r="54"
             fill="none"
@@ -34,7 +33,6 @@ export function ScoreOverview({ evaluation, previousScore }: ScoreOverviewProps)
             strokeWidth="10"
             className="text-muted"
           />
-          {/* Fill */}
           <motion.circle
             cx="60" cy="60" r="54"
             fill="none"
@@ -82,7 +80,6 @@ export function ScoreOverview({ evaluation, previousScore }: ScoreOverviewProps)
         )}
       </div>
 
-      {/* Bonus / Deductions */}
       {(evaluation.bonus_points || evaluation.deductions) && (
         <div className="flex gap-4 text-xs text-muted-foreground">
           {evaluation.bonus_points && evaluation.bonus_points.total > 0 && (

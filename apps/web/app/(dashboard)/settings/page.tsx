@@ -62,7 +62,7 @@ export default function SettingsPage() {
               {errors.github_url && <p className="text-xs text-destructive">{errors.github_url.message}</p>}
             </div>
             <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Saving…</> : "Save Changes"}
+              {isSubmitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Saving...</> : "Save Changes"}
             </Button>
           </form>
         </CardContent>

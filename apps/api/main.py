@@ -1,7 +1,3 @@
-"""
-ResumeScore API — FastAPI application entry point.
-Wraps the interviewstreet/hiring-agent evaluation engine with a REST API.
-"""
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
@@ -20,24 +16,22 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    logger.info("Starting ResumeScore API")
+    logger.info("Starting res.me API")
     logger.info(f"Hiring agent path: {settings.HIRING_AGENT_PATH}")
     if not os.path.exists(settings.HIRING_AGENT_PATH):
         logger.warning(
-            f"⚠️  Hiring agent not found at {settings.HIRING_AGENT_PATH}. "
+            f"Hiring agent not found at {settings.HIRING_AGENT_PATH}. "
             "Run: git clone https://github.com/interviewstreet/hiring-agent ./hiring-agent"
         )
     os.makedirs(settings.LOCAL_UPLOAD_PATH, exist_ok=True)
     yield
-    logger.info("Shutting down ResumeScore API")
-
+    logger.info("Shutting down res.me API")
 
 app = FastAPI(
-    title="ResumeScore API",
-    description="Resume evaluation engine powered by interviewstreet/hiring-agent",
+    title="res.me API",
+    description="Resume evaluation API",
     version="1.0.0",
     lifespan=lifespan,
     docs_url="/docs",
@@ -57,7 +51,6 @@ app.include_router(auth.router, prefix="/auth", tags=["auth"])
 app.include_router(resumes.router, prefix="/resumes", tags=["resumes"])
 app.include_router(evaluations.router, prefix="/evaluations", tags=["evaluations"])
 app.include_router(reports.router, prefix="/reports", tags=["reports"])
-
 
 @app.exception_handler(Exception)
 async def global_exception_handler(request, exc):

@@ -84,7 +84,7 @@ export function ResumeDropzone() {
               {isDragActive ? "Drop your resume here" : "Drag & drop your resume"}
             </p>
             <p className="mt-1 text-xs text-muted-foreground">
-              PDF or DOCX · Max {MAX_SIZE / 1024 / 1024}MB · <span className="text-primary">Browse files</span>
+              PDF or DOCX, max {MAX_SIZE / 1024 / 1024}MB. <span className="text-primary">Browse files</span>
             </p>
           </div>
         </motion.div>
@@ -116,7 +116,7 @@ export function ResumeDropzone() {
             className="space-y-2 rounded-lg border bg-card p-4"
           >
             <div className="flex items-center justify-between text-sm">
-              <span className="font-medium">Uploading & evaluating…</span>
+              <span className="font-medium">Uploading & evaluating...</span>
               <span className="text-muted-foreground">{progress}%</span>
             </div>
             <Progress value={progress} />

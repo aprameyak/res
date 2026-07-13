@@ -28,7 +28,6 @@ export default function JobMatchPage() {
 
       {result && result.evaluation && (
         <div className="space-y-4">
-          {/* Overall Score from evaluation */}
           {result.evaluation.total_score !== null && (
             <Card>
               <CardHeader className="pb-2">
@@ -51,7 +50,6 @@ export default function JobMatchPage() {
             </Card>
           )}
 
-          {/* Key Strengths */}
           {result.evaluation.key_strengths && result.evaluation.key_strengths.length > 0 && (
             <Card>
               <CardHeader className="pb-2">
@@ -73,7 +71,6 @@ export default function JobMatchPage() {
             </Card>
           )}
 
-          {/* Areas for improvement */}
           {result.evaluation.areas_for_improvement && result.evaluation.areas_for_improvement.length > 0 && (
             <Card>
               <CardHeader className="pb-2">
@@ -95,7 +92,6 @@ export default function JobMatchPage() {
             </Card>
           )}
 
-          {/* Category scores for this JD */}
           {result.evaluation.scores && (
             <Card>
               <CardHeader className="pb-2">

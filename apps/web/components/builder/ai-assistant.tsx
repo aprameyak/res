@@ -47,7 +47,7 @@ export function SuggestEdits({ content, sectionType, onApply }: SuggestEditsProp
         {loading ? (
           <>
             <Loader2 className="mr-2 h-3.5 w-3.5 animate-spin" />
-            Working…
+            Working...
           </>
         ) : (
           "Suggest edits"
@@ -90,5 +90,4 @@ export function SuggestEdits({ content, sectionType, onApply }: SuggestEditsProp
   );
 }
 
-/** @deprecated Use SuggestEdits */
 export const AIAssistant = SuggestEdits;

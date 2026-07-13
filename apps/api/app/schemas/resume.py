@@ -1,9 +1,7 @@
-"""Resume Pydantic schemas."""
 from pydantic import BaseModel
 from typing import Optional, Any
 from datetime import datetime
 import uuid
-
 
 class ResumeOut(BaseModel):
     id: uuid.UUID
@@ -19,13 +17,10 @@ class ResumeOut(BaseModel):
 
     model_config = {"from_attributes": True}
 
-
 class ResumeListOut(BaseModel):
     resumes: list[ResumeOut]
     total: int
 
-
 class BuilderUploadIn(BaseModel):
-    """Plain-text resume from the res.me editor."""
     content: str
     filename: str = "careerforge-resume.pdf"

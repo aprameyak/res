@@ -51,7 +51,7 @@ export default function LandingPage() {
             Your resume workspace.
           </h1>
           <p className="mt-4 max-w-md text-muted-foreground">
-            Write, score, tailor, and export — one document, one place.
+            Write, score, tailor, and export - one document, one place.
           </p>
           <Link
             href="/register"

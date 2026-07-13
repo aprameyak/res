@@ -1,4 +1,3 @@
-"""Service for creating and managing evaluations."""
 import logging
 import uuid
 from typing import Optional
@@ -14,13 +13,11 @@ logger = logging.getLogger(__name__)
 
 _adapter: Optional[HiringAgentAdapter] = None
 
-
 def get_adapter() -> HiringAgentAdapter:
     global _adapter
     if _adapter is None:
         _adapter = HiringAgentAdapter(settings.HIRING_AGENT_PATH)
     return _adapter
-
 
 def create_evaluation_record(db: Session, resume_id: uuid.UUID, user_id: uuid.UUID, job_description: Optional[str] = None) -> Evaluation:
     evaluation = Evaluation(
@@ -34,15 +31,12 @@ def create_evaluation_record(db: Session, resume_id: uuid.UUID, user_id: uuid.UU
     db.refresh(evaluation)
     return evaluation
 
-
 def store_evaluation_result(db: Session, evaluation: Evaluation, result: dict) -> Evaluation:
-    """Parse hiring-agent output and persist to database."""
     try:
         eval_data = result.get("evaluation", {})
         github_data = result.get("github_data", {})
         parsed = result.get("parsed_resume", {})
 
-        # Extract candidate name
         basics = parsed.get("basics", {})
         candidate_name = basics.get("name") or eval_data.get("candidate_name")
 
@@ -103,14 +97,12 @@ def store_evaluation_result(db: Session, evaluation: Evaluation, result: dict) -
         db.commit()
         raise
 
-
 def get_evaluation(db: Session, evaluation_id: uuid.UUID, user_id: uuid.UUID) -> Optional[Evaluation]:
     return (
         db.query(Evaluation)
         .filter(Evaluation.id == evaluation_id, Evaluation.user_id == user_id)
         .first()
     )
-
 
 def get_resume_evaluations(db: Session, resume_id: uuid.UUID, user_id: uuid.UUID) -> list[Evaluation]:
     return (
@@ -120,9 +112,7 @@ def get_resume_evaluations(db: Session, resume_id: uuid.UUID, user_id: uuid.UUID
         .all()
     )
 
-
 def compare_evaluations(eval_a: Evaluation, eval_b: Evaluation) -> dict:
-    """Compute diff between two evaluations."""
     categories = [
         ("open_source", "Open Source", 35),
         ("self_projects", "Self Projects", 30),
