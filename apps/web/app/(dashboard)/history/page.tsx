@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { useEvaluations } from "@/hooks/use-evaluations";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -100,15 +99,8 @@ export default function HistoryPage() {
               )}
             </div>
 
-            <AnimatePresence>
               {expanded === evaluation.id && evaluation.status === "completed" && (
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.25 }}
-                  className="overflow-hidden border-t"
-                >
+                <div className="overflow-hidden border-t">
                   <div className="p-4 space-y-6">
                     <div className="flex gap-6 flex-wrap">
                       <ScoreOverview evaluation={evaluation} />
@@ -119,9 +111,8 @@ export default function HistoryPage() {
                       <GitHubSummary githubData={evaluation.github_data} />
                     )}
                   </div>
-                </motion.div>
+                </div>
               )}
-            </AnimatePresence>
           </Card>
         ))}
       </div>

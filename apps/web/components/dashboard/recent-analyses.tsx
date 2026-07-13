@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { cn, formatDateTime, scoreColor } from "@/lib/utils";
 import type { Evaluation } from "@/types/api";
@@ -33,12 +32,7 @@ export function RecentAnalyses({ evaluations }: RecentAnalysesProps) {
         const statusCfg = STATUS_CONFIG[evaluation.status];
         const StatusIcon = statusCfg.icon;
         return (
-          <motion.div
-            key={evaluation.id}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.05 }}
-          >
+          <div key={evaluation.id}>
             <Link
               href={`/history`}
               className="flex items-center justify-between rounded-lg p-3 transition-colors hover:bg-muted/50"
@@ -61,7 +55,7 @@ export function RecentAnalyses({ evaluations }: RecentAnalysesProps) {
                 <Badge variant="outline" className="text-xs">{statusCfg.label}</Badge>
               )}
             </Link>
-          </motion.div>
+          </div>
         );
       })}
     </div>

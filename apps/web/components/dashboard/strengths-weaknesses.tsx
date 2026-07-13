@@ -1,5 +1,4 @@
 "use client";
-import { motion } from "framer-motion";
 import { CheckCircle2, AlertCircle } from "lucide-react";
 import type { Evaluation } from "@/types/api";
 
@@ -23,16 +22,10 @@ export function StrengthsWeaknesses({ evaluation }: StrengthsWeaknessesProps) {
             <li className="text-sm text-muted-foreground">No strengths identified</li>
           ) : (
             strengths.map((s, i) => (
-              <motion.li
-                key={i}
-                className="flex items-start gap-2 text-sm"
-                initial={{ opacity: 0, x: -8 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.08 }}
-              >
+              <li key={i} className="flex items-start gap-2 text-sm">
                 <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500" />
                 {s}
-              </motion.li>
+              </li>
             ))
           )}
         </ul>
@@ -48,16 +41,10 @@ export function StrengthsWeaknesses({ evaluation }: StrengthsWeaknessesProps) {
             <li className="text-sm text-muted-foreground">No areas identified</li>
           ) : (
             weaknesses.map((w, i) => (
-              <motion.li
-                key={i}
-                className="flex items-start gap-2 text-sm"
-                initial={{ opacity: 0, x: -8 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.08 }}
-              >
+              <li key={i} className="flex items-start gap-2 text-sm">
                 <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
                 {w}
-              </motion.li>
+              </li>
             ))
           )}
         </ul>

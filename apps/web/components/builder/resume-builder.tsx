@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -89,13 +88,8 @@ export function ResumeBuilder() {
           </CardContent>
         </Card>
 
-        {document.sections.map((section, index) => (
-          <motion.div
-            key={section.id}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.05 }}
-          >
+        {document.sections.map((section) => (
+          <div key={section.id}>
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
                 <CardTitle className="text-base">{section.title}</CardTitle>
@@ -125,7 +119,7 @@ export function ResumeBuilder() {
                 />
               </CardContent>
             </Card>
-          </motion.div>
+          </div>
         ))}
 
         <div className="flex flex-wrap gap-2">

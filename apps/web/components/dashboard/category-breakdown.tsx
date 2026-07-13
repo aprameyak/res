@@ -1,5 +1,4 @@
 "use client";
-import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { cn, scoreColor } from "@/lib/utils";
@@ -34,12 +33,7 @@ export function CategoryBreakdown({ evaluation }: CategoryBreakdownProps) {
       {categories.map(({ key, label, max, score, evidence, Icon }, i) => {
         const pct = (score / max) * 100;
         return (
-          <motion.div
-            key={key}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.1, duration: 0.4 }}
-          >
+          <div key={key}>
             <Card className="h-full">
               <CardHeader className="pb-2">
                 <CardTitle className="flex items-center justify-between text-sm font-medium">
@@ -59,7 +53,7 @@ export function CategoryBreakdown({ evaluation }: CategoryBreakdownProps) {
                 )}
               </CardContent>
             </Card>
-          </motion.div>
+          </div>
         );
       })}
     </div>

@@ -1,5 +1,4 @@
 "use client";
-import { motion } from "framer-motion";
 import { useEvaluations } from "@/hooks/use-evaluations";
 import { useResumes } from "@/hooks/use-resumes";
 import { useAuthStore } from "@/lib/store";
@@ -35,11 +34,7 @@ export default function DashboardPage() {
   if (!latestEval) {
     return (
       <div className="flex h-full flex-col items-center justify-center gap-6 text-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="space-y-3"
-        >
+        <div className="space-y-3">
           <FileText className="mx-auto h-16 w-16 text-muted-foreground/40" />
           <h2 className="text-xl font-semibold">
             Welcome{user?.full_name ? `, ${user.full_name.split(" ")[0]}` : ""}
@@ -53,19 +48,19 @@ export default function DashboardPage() {
               Open My Resume
             </Button>
           </Link>
-        </motion.div>
+        </div>
       </div>
     );
   }
 
   return (
     <div className="space-y-6">
-      <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }}>
+      <div>
         <h1 className="text-lg font-semibold">Dashboard</h1>
         <p className="text-sm text-muted-foreground">
           {latestEval.candidate_name ? `Latest evaluation for ${latestEval.candidate_name}` : "Your latest evaluation"}
         </p>
-      </motion.div>
+      </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <Card className="flex flex-col items-center justify-center p-6">

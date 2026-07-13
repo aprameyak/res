@@ -89,5 +89,3 @@ export function SuggestEdits({ content, sectionType, onApply }: SuggestEditsProp
     </div>
   );
 }
-
-export const AIAssistant = SuggestEdits;

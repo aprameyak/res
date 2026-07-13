@@ -1,5 +1,4 @@
 "use client";
-import { motion } from "framer-motion";
 import { cn, scoreColor } from "@/lib/utils";
 import type { CompareResult } from "@/types/api";
 import { TrendingUp, TrendingDown, Minus } from "lucide-react";
@@ -24,12 +23,9 @@ export function ComparisonView({ result }: ComparisonViewProps) {
       <div className="space-y-3">
         <h3 className="text-sm font-semibold">Category Comparison</h3>
         {category_diffs.map((diff, i) => (
-          <motion.div
+          <div
             key={diff.category}
             className="space-y-1"
-            initial={{ opacity: 0, x: -8 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: i * 0.08 }}
           >
             <div className="flex items-center justify-between text-sm">
               <span className="font-medium">{diff.category}</span>
@@ -56,7 +52,7 @@ export function ComparisonView({ result }: ComparisonViewProps) {
                 <Progress value={(diff.score_b / diff.max) * 100} className="h-1" />
               </div>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
 
