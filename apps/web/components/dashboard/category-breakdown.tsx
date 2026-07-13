@@ -30,7 +30,7 @@ export function CategoryBreakdown({ evaluation }: CategoryBreakdownProps) {
 
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-      {categories.map(({ key, label, max, score, evidence, Icon }, i) => {
+      {categories.map(({ key, label, max, score, evidence, Icon }) => {
         const pct = (score / max) * 100;
         return (
           <div key={key}>

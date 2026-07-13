@@ -18,14 +18,14 @@ import { FileText } from "lucide-react";
 export default function DashboardPage() {
   const user = useAuthStore((s) => s.user);
   const { data: evaluationsData, isLoading: evalsLoading } = useEvaluations();
-  const { data: resumesData, isLoading: resumesLoading } = useResumes();
+  useResumes();
 
   const evaluations = evaluationsData?.evaluations ?? [];
   const completedEvals = evaluations.filter((e) => e.status === "completed");
   const latestEval = completedEvals[0] ?? null;
   const previousEval = completedEvals[1] ?? null;
 
-  const isLoading = evalsLoading || resumesLoading;
+  const isLoading = evalsLoading;
 
   if (isLoading) {
     return <DashboardSkeleton />;

@@ -6,12 +6,14 @@ import { useAuth } from "@/hooks/use-auth";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/brand/logo";
-import { LayoutDashboard, History, Settings, LogOut, FileText } from "lucide-react";
+import { LayoutDashboard, History, Settings, LogOut, FileText, GitCompare, Briefcase } from "lucide-react";
 
 const NAV_ITEMS = [
   { href: "/resume", label: "Resume", icon: FileText },
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/history", label: "History", icon: History },
+  { href: "/compare", label: "Compare", icon: GitCompare },
+  { href: "/job-match", label: "Job match", icon: Briefcase },
   { href: "/settings", label: "Settings", icon: Settings },
 ];
 

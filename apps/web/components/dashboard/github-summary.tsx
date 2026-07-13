@@ -9,7 +9,7 @@ interface GitHubSummaryProps {
 }
 
 export function GitHubSummary({ githubData }: GitHubSummaryProps) {
-  const { profile, projects = [], open_source_projects = [], self_projects = [] } = githubData;
+  const { profile, projects = [] } = githubData;
 
   if (!profile) return null;
 

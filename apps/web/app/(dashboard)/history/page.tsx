@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useEvaluations } from "@/hooks/use-evaluations";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -99,20 +99,18 @@ export default function HistoryPage() {
               )}
             </div>
 
-              {expanded === evaluation.id && evaluation.status === "completed" && (
-                <div className="overflow-hidden border-t">
-                  <div className="p-4 space-y-6">
-                    <div className="flex gap-6 flex-wrap">
-                      <ScoreOverview evaluation={evaluation} />
-                    </div>
-                    <CategoryBreakdown evaluation={evaluation} />
-                    <StrengthsWeaknesses evaluation={evaluation} />
-                    {evaluation.github_data && Object.keys(evaluation.github_data).length > 0 && (
-                      <GitHubSummary githubData={evaluation.github_data} />
-                    )}
-                  </div>
+            {expanded === evaluation.id && evaluation.status === "completed" && (
+              <div className="border-t">
+                <div className="space-y-6 p-4">
+                  <ScoreOverview evaluation={evaluation} />
+                  <CategoryBreakdown evaluation={evaluation} />
+                  <StrengthsWeaknesses evaluation={evaluation} />
+                  {evaluation.github_data && Object.keys(evaluation.github_data).length > 0 && (
+                    <GitHubSummary githubData={evaluation.github_data} />
+                  )}
                 </div>
-              )}
+              </div>
+            )}
           </Card>
         ))}
       </div>

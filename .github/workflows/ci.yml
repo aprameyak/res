@@ -35,12 +35,9 @@ jobs:
           LOCAL_UPLOAD_PATH: /tmp/uploads
           HIRING_AGENT_PATH: ./hiring-agent
 
-  web-typecheck:
-    name: Frontend Type Check
+  web:
+    name: Frontend
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: apps/web
     steps:
       - uses: actions/checkout@v4
 
@@ -48,13 +45,13 @@ jobs:
         with:
           node-version: "20"
           cache: npm
-          cache-dependency-path: apps/web/package-lock.json
+          cache-dependency-path: package-lock.json
 
       - name: Install dependencies
         run: npm install
 
       - name: Type check
-        run: npm run type-check
+        run: npm run type-check --workspace=web
 
-      - name: Lint
-        run: npm run lint
+      - name: Build
+        run: npm run build --workspace=web

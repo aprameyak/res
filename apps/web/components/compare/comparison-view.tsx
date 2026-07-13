@@ -22,7 +22,7 @@ export function ComparisonView({ result }: ComparisonViewProps) {
 
       <div className="space-y-3">
         <h3 className="text-sm font-semibold">Category Comparison</h3>
-        {category_diffs.map((diff, i) => (
+        {category_diffs.map((diff) => (
           <div
             key={diff.category}
             className="space-y-1"

@@ -18,7 +18,7 @@ interface ScoreRadarChartProps {
 export function ScoreRadarChart({ evaluation, comparison }: ScoreRadarChartProps) {
   if (!evaluation.scores) return null;
 
-  const data = (Object.entries(SCORE_WEIGHTS) as [keyof typeof SCORE_WEIGHTS, any][]).map(
+  const data = (Object.entries(SCORE_WEIGHTS) as [keyof typeof SCORE_WEIGHTS, (typeof SCORE_WEIGHTS)[keyof typeof SCORE_WEIGHTS]][]).map(
     ([key, meta]) => ({
       category: meta.label,
       score: Math.round((evaluation.scores![key].score / meta.max) * 100),
@@ -48,8 +48,8 @@ export function ScoreRadarChart({ evaluation, comparison }: ScoreRadarChartProps
         <Radar
           name="Score"
           dataKey="score"
-          stroke="#6366f1"
-          fill="#6366f1"
+          stroke="hsl(var(--foreground))"
+          fill="hsl(var(--foreground))"
           fillOpacity={0.25}
           strokeWidth={2}
         />

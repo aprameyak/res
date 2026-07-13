@@ -28,7 +28,7 @@ export function RecentAnalyses({ evaluations }: RecentAnalysesProps) {
 
   return (
     <div className="space-y-1">
-      {evaluations.slice(0, 8).map((evaluation, i) => {
+      {evaluations.slice(0, 8).map((evaluation) => {
         const statusCfg = STATUS_CONFIG[evaluation.status];
         const StatusIcon = statusCfg.icon;
         return (
