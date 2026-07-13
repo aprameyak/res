@@ -1,0 +1,1 @@
+export { generateLatex } from "./generator";

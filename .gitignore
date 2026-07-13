@@ -1,0 +1,48 @@
+# Node
+node_modules/
+.next/
+dist/
+build/
+.turbo/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Database
+*.db
+*.sqlite
+
+# Uploads
+uploads/
+cache/
+resume_evaluations.csv
+
+# Reports
+apps/api/uploads/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# The hiring-agent is cloned into the Docker image at build time (see Dockerfile).
+# For local dev, clone it manually: git clone https://github.com/interviewstreet/hiring-agent ./hiring-agent
+# The directory itself is gitignored but a .gitkeep is committed so the path exists.
+hiring-agent/*
+!hiring-agent/.gitkeep

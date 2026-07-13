@@ -1,0 +1,151 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
+\usepackage[top=0.6cm, left=1.4cm, right=1.4cm, bottom=1.4cm]{geometry}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.15in}
+\addtolength{\textwidth}{0.3in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\pdfgentounicode=1
+
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{0pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textbf{\small #2} \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & \textbf{\small #2}\\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+\begin{document}
+
+%----------HEADING----------
+
+\begin{center}
+    {\Large \scshape Full Name Here} \\[2mm]
+    \footnotesize
+    \underline{phone-number} ~
+    \underline{email@example.com} ~
+    \underline{\href{https://linkedin.com}{linkedin.com/in/username}} ~
+    \underline{\href{https://github.com}{github.com/username}} ~
+    \underline{\href{https://portfolio.com}{portfolio.com}}
+    \vspace{-8pt}
+\end{center}
+
+%-----------EDUCATION-----------
+\section{Education} \\[1mm]
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {University Name}{Expected Graduation Date}
+    {\textbf{Degree Name and Major} | Minor in Subject -- \textbf{GPA: X.XX}}{City, State}
+\resumeSubHeadingListEnd
+
+\resumeItemListStart
+  \resumeItem{\textbf{Coursework}: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt}
+  \resumeItem{\textbf{Certifications}: Certification One, Certification Two}
+\resumeItemListEnd
+\vspace{-15}
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+\resumeSubHeadingListStart
+
+\resumeSubheading
+  {Company Name}{Start Date -- End Date}
+  {Job Title}{City, State}
+\resumeItemListStart
+  \resumeItem{Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore}
+  \resumeItem{Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip}
+  \resumeItem{Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat}
+\resumeItemListEnd
+
+\resumeSubheading
+  {Organization Name}{Start Date -- End Date}
+  {Role Title}{City, State}
+\resumeItemListStart
+  \resumeItem{Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque}
+  \resumeItem{Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit}
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+\vspace{-12pt}
+
+%-----------PROJECTS-----------
+\section{Projects}
+\vspace{-5pt}
+\resumeSubHeadingListStart
+
+\resumeProjectHeading
+  {\textbf{Project Name} $|$ \emph{Technology One, Technology Two, Technology Three}}{ }
+\resumeItemListStart
+  \resumeItem{Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt}
+\resumeItemListEnd
+
+\resumeProjectHeading
+  {\textbf{Another Project} $|$ \emph{Tool A, Tool B, Tool C}}{ }
+\resumeItemListStart
+  \resumeItem{Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip}
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+\vspace{-15pt}
+
+%-----------SKILLS-----------
+\section{Skills}
+\begin{itemize}[leftmargin=0.15in, label={}]
+\small{\item{
+  \textbf{Languages}: Language One, Language Two, Language Three \\[1mm]
+  \textbf{Frameworks}: Framework One, Framework Two, Framework Three \\[1mm]
+  \textbf{Tools}: Tool One, Tool Two, Tool Three
+}}
+\end{itemize}
+\vspace{-16pt}
+
+\end{document}
+
