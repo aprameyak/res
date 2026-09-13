@@ -1,11 +1,9 @@
-version: "3.8"
-
 services:
   postgres:
     image: postgres:16-alpine
     environment:
-      POSTGRES_DB: resumescore
-      POSTGRES_USER: resumescore
+      POSTGRES_DB: resme
+      POSTGRES_USER: resme
       POSTGRES_PASSWORD: password
     volumes:
       - postgres_data_dev:/var/lib/postgresql/data
@@ -23,7 +21,7 @@ services:
       dockerfile: Dockerfile.dev
     depends_on: [postgres, redis]
     environment:
-      DATABASE_URL: postgresql://resumescore:password@postgres:5432/resumescore
+      DATABASE_URL: postgresql://resme:password@postgres:5432/resme
       REDIS_URL: redis://redis:6379/0
       SECRET_KEY: dev-secret-key-not-for-production-use
       STORAGE_BACKEND: local
@@ -48,7 +46,7 @@ services:
       dockerfile: Dockerfile.dev
     depends_on: [postgres, redis]
     environment:
-      DATABASE_URL: postgresql://resumescore:password@postgres:5432/resumescore
+      DATABASE_URL: postgresql://resme:password@postgres:5432/resme
       REDIS_URL: redis://redis:6379/0
       SECRET_KEY: dev-secret-key-not-for-production-use
       STORAGE_BACKEND: local

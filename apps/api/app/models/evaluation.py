@@ -1,10 +1,12 @@
+import enum
 import uuid
 from datetime import datetime
-from sqlalchemy import Column, String, Float, DateTime, ForeignKey, Text, Enum
-from sqlalchemy.dialects.postgresql import UUID, JSONB, ARRAY
+
+from sqlalchemy import Column, DateTime, Enum, Float, ForeignKey, JSON, String, Text, Uuid
 from sqlalchemy.orm import relationship
-import enum
+
 from app.database import Base
+
 
 class EvaluationStatus(str, enum.Enum):
     PENDING = "pending"
@@ -12,14 +14,15 @@ class EvaluationStatus(str, enum.Enum):
     COMPLETED = "completed"
     FAILED = "failed"
 
+
 class Evaluation(Base):
     __tablename__ = "evaluations"
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    resume_id = Column(UUID(as_uuid=True), ForeignKey("resumes.id", ondelete="CASCADE"), nullable=False, index=True)
-    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="SET NULL"), nullable=True, index=True)
+    id = Column(Uuid, primary_key=True, default=uuid.uuid4)
+    resume_id = Column(Uuid, ForeignKey("resumes.id", ondelete="CASCADE"), nullable=False, index=True)
+    user_id = Column(Uuid, ForeignKey("users.id", ondelete="SET NULL"), nullable=True, index=True)
     candidate_name = Column(String(255), nullable=True)
-    status = Column(Enum(EvaluationStatus), default=EvaluationStatus.PENDING, nullable=False)
+    status = Column(Enum(EvaluationStatus, native_enum=False), default=EvaluationStatus.PENDING, nullable=False)
     error_message = Column(Text, nullable=True)
     task_id = Column(String(255), nullable=True)
 
@@ -46,12 +49,12 @@ class Evaluation(Base):
 
     total_score = Column(Float, nullable=True)
 
-    key_strengths = Column(JSONB, default=list, nullable=True)          # list[str]
-    areas_for_improvement = Column(JSONB, default=list, nullable=True)  # list[str]
+    key_strengths = Column(JSON, default=list, nullable=True)
+    areas_for_improvement = Column(JSON, default=list, nullable=True)
 
-    raw_result = Column(JSONB, nullable=True)
+    raw_result = Column(JSON, nullable=True)
 
-    github_data = Column(JSONB, nullable=True)
+    github_data = Column(JSON, nullable=True)
 
     job_description = Column(Text, nullable=True)
 
@@ -64,25 +67,26 @@ class Evaluation(Base):
     def __repr__(self) -> str:
         return f"<Evaluation id={self.id} score={self.total_score} status={self.status}>"
 
+
 class JobMatch(Base):
     __tablename__ = "job_matches"
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    resume_id = Column(UUID(as_uuid=True), ForeignKey("resumes.id", ondelete="CASCADE"), nullable=False, index=True)
-    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="SET NULL"), nullable=True)
-    evaluation_id = Column(UUID(as_uuid=True), ForeignKey("evaluations.id", ondelete="SET NULL"), nullable=True)
+    id = Column(Uuid, primary_key=True, default=uuid.uuid4)
+    resume_id = Column(Uuid, ForeignKey("resumes.id", ondelete="CASCADE"), nullable=False, index=True)
+    user_id = Column(Uuid, ForeignKey("users.id", ondelete="SET NULL"), nullable=True)
+    evaluation_id = Column(Uuid, ForeignKey("evaluations.id", ondelete="SET NULL"), nullable=True)
 
     job_title = Column(String(255), nullable=True)
     company = Column(String(255), nullable=True)
     job_description = Column(Text, nullable=False)
 
     match_percentage = Column(Float, nullable=True)
-    missing_skills = Column(JSONB, default=list, nullable=True)
-    missing_experience = Column(JSONB, default=list, nullable=True)
+    missing_skills = Column(JSON, default=list, nullable=True)
+    missing_experience = Column(JSON, default=list, nullable=True)
     keyword_coverage = Column(Float, nullable=True)
-    recommendations = Column(JSONB, default=list, nullable=True)
+    recommendations = Column(JSON, default=list, nullable=True)
 
-    raw_result = Column(JSONB, nullable=True)
+    raw_result = Column(JSON, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
 
     resume = relationship("Resume", back_populates="job_matches")

@@ -8,7 +8,7 @@ from app.config import settings
 logger = logging.getLogger(__name__)
 
 celery_app = Celery(
-    "resumescore",
+    "resme",
     broker=settings.celery_broker_url,
     backend=settings.celery_result_backend,
     include=["app.workers.tasks"],

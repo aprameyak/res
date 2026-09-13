@@ -35,7 +35,7 @@ def download_report(
         raise HTTPException(status_code=500, detail=f"Report generation failed: {e}")
 
     candidate = evaluation.candidate_name or "report"
-    filename = f"resumescore_{candidate.replace(' ', '_')}_{evaluation_id}.pdf"
+    filename = f"resme_{candidate.replace(' ', '_')}_{evaluation_id}.pdf"
 
     return FileResponse(
         path=pdf_path,

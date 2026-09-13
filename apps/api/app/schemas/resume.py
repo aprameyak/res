@@ -23,4 +23,4 @@ class ResumeListOut(BaseModel):
 
 class BuilderUploadIn(BaseModel):
     content: str
-    filename: str = "careerforge-resume.pdf"
+    filename: str = "resme-resume.pdf"

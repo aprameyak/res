@@ -1,10 +1,12 @@
+import enum
 import uuid
 from datetime import datetime
-from sqlalchemy import Column, String, Integer, DateTime, ForeignKey, Text, Enum
-from sqlalchemy.dialects.postgresql import UUID, JSONB
+
+from sqlalchemy import Column, DateTime, Enum, ForeignKey, Integer, JSON, String, Text, Uuid
 from sqlalchemy.orm import relationship
-import enum
+
 from app.database import Base
+
 
 class ResumeStatus(str, enum.Enum):
     PENDING = "pending"
@@ -12,20 +14,21 @@ class ResumeStatus(str, enum.Enum):
     COMPLETED = "completed"
     FAILED = "failed"
 
+
 class Resume(Base):
     __tablename__ = "resumes"
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
-    filename = Column(String(512), nullable=False)            # stored filename (uuid-based)
-    original_filename = Column(String(512), nullable=False)   # original user filename
-    file_path = Column(Text, nullable=False)                   # local path or S3 key
-    file_size = Column(Integer, nullable=False)                # bytes
+    id = Column(Uuid, primary_key=True, default=uuid.uuid4)
+    user_id = Column(Uuid, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    filename = Column(String(512), nullable=False)
+    original_filename = Column(String(512), nullable=False)
+    file_path = Column(Text, nullable=False)
+    file_size = Column(Integer, nullable=False)
     content_type = Column(String(100), nullable=False, default="application/pdf")
-    status = Column(Enum(ResumeStatus), default=ResumeStatus.PENDING, nullable=False)
-    parsed_data = Column(JSONB, nullable=True)                 # JSONResume parsed output
+    status = Column(Enum(ResumeStatus, native_enum=False), default=ResumeStatus.PENDING, nullable=False)
+    parsed_data = Column(JSON, nullable=True)
     error_message = Column(Text, nullable=True)
-    task_id = Column(String(255), nullable=True)              # Celery task ID
+    task_id = Column(String(255), nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
 

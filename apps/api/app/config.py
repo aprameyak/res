@@ -4,7 +4,7 @@ from typing import Optional
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
-    DATABASE_URL: str = "postgresql://resumescore:password@localhost:5432/resumescore"
+    DATABASE_URL: str = "postgresql://resme:password@localhost:5432/resme"
 
     REDIS_URL: str = "redis://localhost:6379/0"
 
@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     REFRESH_TOKEN_EXPIRE_DAYS: int = 7
 
-    STORAGE_BACKEND: str = "local"  # "local" | "s3"
+    STORAGE_BACKEND: str = "local"
     LOCAL_UPLOAD_PATH: str = "./uploads"
     MAX_UPLOAD_SIZE_MB: int = 10
 
@@ -37,7 +37,7 @@ class Settings(BaseSettings):
     SMTP_PORT: int = 587
     SMTP_USER: Optional[str] = None
     SMTP_PASSWORD: Optional[str] = None
-    EMAIL_FROM: str = "noreply@resumescore.app"
+    EMAIL_FROM: str = "noreply@res.me"
 
     @property
     def celery_broker_url(self) -> str:
