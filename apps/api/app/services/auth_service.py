@@ -3,7 +3,8 @@ from typing import Optional
 import uuid
 import secrets
 
-from jose import JWTError, jwt
+import jwt
+from jwt import InvalidTokenError
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 
@@ -41,7 +42,7 @@ def decode_access_token(token: str) -> Optional[str]:
         if payload.get("type") != "access":
             return None
         return payload.get("sub")
-    except JWTError:
+    except InvalidTokenError:
         return None
 
 def get_user_by_email(db: Session, email: str) -> Optional[User]:
